@@ -10,6 +10,7 @@
   if (isset($_SERVER['PHP_AUTH_USER']) &&
       isset($_SERVER['PHP_AUTH_PW']))
   {
+    
     $un_temp = mysql_entities_fix_string($connection, $_SERVER['PHP_AUTH_USER']);
     $pw_temp = mysql_entities_fix_string($connection, $_SERVER['PHP_AUTH_PW']);
 
@@ -21,11 +22,11 @@
 		$row = $result->fetch_array(MYSQLI_NUM);
 
 		$result->close();
-
+		
 		$salt1 = "qm&h*";
 		$salt2 = "pg!@";
         $token = hash('ripemd128', "$salt1$pw_temp$salt2");
-		
+		#prompt usre to log in
 		if ($token == $row[1])
 		{
 			session_start();
@@ -34,7 +35,8 @@
 			$_SESSION['role'] = $row[2];
 			echo "Hi $row[0], you are now logged in as a(n) '$row[2]'.";
 			if($row[2] == "administrator"){
-				die ("<p><a href=student.php>Click here to continue</a></p>");
+				#run the admin view if admin logs in
+				die ("<p><a href=SchoolDatabse.php>Click here to continue</a></p>");
 			}else {
 				$query = "SELECT * FROM student WHERE userid='$un_temp'";
 				$result2 = $connection->query($query);
@@ -43,7 +45,7 @@
 				$row2 = $result2->fetch_array(MYSQLI_NUM);
 
 				$result2->close();
-				
+				#display if student logs in
 				die ("<br><p>Welcome $row2[1].<br> Your student ID is: $row2[0] 
 					  <br> Your Major is: $row2[2] <br> Your year is: $row2[3]
 					  <br> Your userid is: $row2[4] <br> Your email is: $row2[5] <br></p> ");
