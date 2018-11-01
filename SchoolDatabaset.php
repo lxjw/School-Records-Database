@@ -18,7 +18,7 @@ if ($conn->connect_error) {
 
 	$sql = "SELECT ID, Name, Major, Year, userid, email FROM student";
 	$result = $conn->query($sql);
-
+	#fetch data from database
 	if ($result->num_rows > 0) {
                          
 		while($row = $result->fetch_assoc()) {
@@ -31,6 +31,7 @@ if ($conn->connect_error) {
 $conn->close();
 ?> 
 
+#form to allow admin to delete students
 <h3> Enter the ID of the student to be removed </h3>
 <form  method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 	ID: <input type="text" name="delID"><br>
@@ -39,6 +40,7 @@ $conn->close();
 
 <br>
 
+#form for admin to fill out when adding a new student
 <h3> Enter the to create a new student </h3>
 <form  method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 	ID: <input type="text" name="addID"><br><br>
@@ -57,12 +59,13 @@ $username = "root";
 $password = "";
 $dbname = "SchoolName";
 
+#start new connection to database
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 } 
-
+#send data to be stored into database
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	if (isset($_POST['delete'])) {
 		$tempDelID = $_POST['delID'];
