@@ -31,7 +31,7 @@ if ($conn->connect_error) {
 $conn->close();
 ?> 
 
-#form to allow admin to delete students
+<!--form to allow admin to delete students-->
 <h3> Enter the ID of the student to be removed </h3>
 <form  method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 	ID: <input type="text" name="delID"><br>
