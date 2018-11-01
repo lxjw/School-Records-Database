@@ -40,7 +40,7 @@ $conn->close();
 
 <br>
 
-#form for admin to fill out when adding a new student
+<!-- form for admin to fill out when adding a new student -->
 <h3> Enter the to create a new student </h3>
 <form  method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 	ID: <input type="text" name="addID"><br><br>
