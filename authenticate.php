@@ -36,7 +36,7 @@
 			echo "Hi $row[0], you are now logged in as a(n) '$row[2]'.";
 			if($row[2] == "administrator"){
 				#run the admin view if admin logs in
-				die ("<p><a href=SchoolDatabse.php>Click here to continue</a></p>");
+				die ("<p><a href=SchoolDatabase.php>Click here to continue</a></p>");
 			}else {
 				$query = "SELECT * FROM student WHERE userid='$un_temp'";
 				$result2 = $connection->query($query);
